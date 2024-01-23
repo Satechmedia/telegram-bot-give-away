@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS users_events;
-DROP TABLE IF EXISTS events;
-DROP TABLE IF EXISTS users;
-DROP TYPE IF EXISTS user_role;
+
+-- Add SQL in this file to drop the database tables 
+DROP TABLE movies;

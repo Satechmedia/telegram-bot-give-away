@@ -1,52 +1,10 @@
 {
-  "$schema": "https://platformatic.dev/schemas/v0.34.0/db",
-  "server": {
-    "hostname": "{PLT_SERVER_HOSTNAME}",
-    "pluginTimeout": 40000,
-    "port": "{PORT}",
-    "logger": {
-      "level": "{PLT_SERVER_LOGGER_LEVEL}"
-    },
-    "cors": {
-      "origin": "{PLT_CORS_ORIGIN}",
-      "methods": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ]
-    }
-  },
-  "authorization": {
-    "rules": [
-      {
-        "role": "anonymous",
-        "entities": [
-          "user",
-          "event",
-          "usersEvent"
-        ],
-        "find": false,
-        "save": false,
-        "delete": false
-      }
-    ],
-    "jwt": {
-      "secret": "{PLT_JWT_SECRET}"
-    }
-  },
+  "$schema": "https://platformatic.dev/schemas/v1.10.0/db",
   "db": {
-    "schemalock": true,
     "connectionString": "{DATABASE_URL}",
-    "poolSize": 5,
-    "graphql": false,
-    "openapi": {
-      "ignore": {
-        "users": true,
-        "usersEvents": true
-      }
-    },
-    "events": false
+    "graphql": true,
+    "openapi": true,
+    "schemalock": true
   },
   "watch": {
     "ignore": [
@@ -54,15 +12,26 @@
       "*.sqlite-journal"
     ]
   },
+  "server": {
+    "hostname": "{PLT_SERVER_HOSTNAME}",
+    "port": "{PORT}",
+    "logger": {
+      "level": "{PLT_SERVER_LOGGER_LEVEL}"
+    }
+  },
   "migrations": {
     "dir": "migrations",
     "autoApply": true
   },
   "plugins": {
     "paths": [
-      "plugin-root.js",
-      "plugin-telegram.js",
-      "plugin-keep-alive.js"
+      {
+        "path": "./plugins",
+        "encapsulate": false
+      },
+      {
+        "path": "./routes"
+      }
     ]
   },
   "types": {
